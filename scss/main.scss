@@ -1,6 +1,8 @@
-@import "variables";
-@import "mixins";
+@import "partials/variables";
+@import "partials/mixins";
 
+@include google-font("Alegreya+Sans");
+@include google-font("Titillium+Web");
 
 @include fancy-links;
 
@@ -13,6 +15,10 @@
 body {
   font-family: $text-font;
   color: $text-color;
+
+  @include medium-large-screens {
+    font-size: 125%;
+  }
 }
 
 h1, h2, h3, h4 {
@@ -59,6 +65,10 @@ a {
 
 #main {
   width: $content-width;
+  @include medium-large-screens {
+    width: auto;
+    max-width: $content-width;
+  }
   margin-left: auto;
   margin-right: auto;
 
