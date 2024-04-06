@@ -2,7 +2,6 @@
 @import "partials/variables";
 @import "partials/mixins";
 
-
 @include google-font("Alegreya+Sans");
 @include google-font("Titillium+Web");
 
@@ -14,12 +13,21 @@
   }
 }
 
+.error {
+  color: red;
+}
 
+.critical-error {
+  @extend .error;
+  bottom: 1px solid red;
+  font-weight: bold;
+}
 
 body {
   font-family: $text-font;
   font-size: em(18px);
   color: $text-color;
+  background-color: $body-background-color;
 
   @include large-screens {
     font-size: 125%;
@@ -41,14 +49,44 @@ p {
 a {
   color: $link-color;
 
+  @include blue-beans {
+    color: #8779ff;
+  }
+
   &:hover {
     color: darken($link-color, 15%);
   }
 }
 
-.warning-button {
+%highlight {
+  font-style: italic;
+}
+
+.sub-title {
+  @extend %highlight;
+  @extend .foo !optional;
+  font-size: em(20px);
+}
+
+@mixin warning-button {
   @include warning;
   padding: 8px 12px;
+}
+
+.warning-button {
+  @include warning-button;
+}
+
+.cta-button {
+  @include warning-button;
+  @extend .error;
+  @include rounded;
+  font-weight: bold;
+}
+
+.super-cta-button {
+  @extend .cta-button;
+  font-size: em(20px);
 }
 
 #header {
@@ -101,7 +139,7 @@ a {
 
     li {
       list-style-type: none;
-      padding: 16px 20px;
+      padding: em(16px) em(20px);
       border-bottom: 1px dashed #999;
 
       &:hover {
@@ -115,4 +153,8 @@ a {
   clear: both;
   height: $footer-height;
   background-color: $ternary-color;
+
+  @include rogers-rovers {
+    border-top: 5px solid darken($ternary-color, 15%);
+  }
 }
